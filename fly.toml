@@ -1,0 +1,28 @@
+# Fly.io configuration for DocuTranslate
+app = "docutranslate"
+primary_region = "sin"  # Singapore - change to your preferred region
+
+[build]
+
+[http_service]
+  internal_port = 8010
+  force_https = true
+  auto_stop_machines = false
+  auto_start_machines = true
+  min_machines_running = 1
+
+  [[http_service.checks]]
+    grace_period = "10s"
+    interval = "30s"
+    method = "GET"
+    timeout = "5s"
+    path = "/api/meta"
+
+[[vm]]
+  memory_mb = 512
+  cpu_kind = "shared"
+  cpus = 1
+
+[env]
+  PORT = "8010"
+  PYTHON_VERSION = "3.11"
